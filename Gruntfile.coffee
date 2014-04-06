@@ -20,6 +20,7 @@ module.exports = (grunt) ->
           modifyVars:
             'img-path': '"../img/"'
             'icon-font-path': '"../fonts/"'
+            'fa-font-path': '"../fonts/"'
         files:
           './client/css/main.css': './client/css/main.less'
       prod:
@@ -28,6 +29,7 @@ module.exports = (grunt) ->
           modifyVars:
             'img-path': '"../img/"'
             'icon-font-path': '"../fonts/"'
+            'fa-font-path': '"../fonts/"'
         files:
           './dist/css/main.css': './client/css/main.less'
 
