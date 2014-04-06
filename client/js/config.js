@@ -1,6 +1,6 @@
 require.config({
 
-    baseUrl: './js',
+    baseUrl: '/js',
 
     paths: {
         app: 'app',
@@ -16,7 +16,7 @@ require.config({
         cs: 'libs/require-cs/cs',
         'coffee-script': 'libs/coffee-script/extras/coffee-script',
         text: 'libs/requirejs-text/text',
-        bootstrap: 'etc/bootstrap',
+        bootstrap: 'lib/bootstrap/dist/js/bootstrap',
         eventBus: 'etc/eventBus',
         'rivets-config': 'etc/rivets-config',
         'socket.io': 'libs/socket.io-client/dist/socket.io',

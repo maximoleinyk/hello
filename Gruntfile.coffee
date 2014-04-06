@@ -9,9 +9,10 @@ module.exports = (grunt) ->
 
     eslint:
       target:
-        src: ['./client/js/app', './client/js/ect']
+        src: ['./client/js/app/**/*.js', './client/js/etc/**/*.js']
       options:
         config: 'eslint.json'
+
     less:
       dev:
         options:
@@ -29,6 +30,7 @@ module.exports = (grunt) ->
             'icon-font-path': '"../fonts/"'
         files:
           './dist/css/main.css': './client/css/main.less'
+
     coffee:
       dev:
         expand: true
@@ -54,7 +56,7 @@ module.exports = (grunt) ->
         options:
           livereload: true
       validate:
-        files: ['./client/js/app', './client/js/ect', './client/js/config.coffee']
+        files: ['./client/js/**/*.js']
         tasks: ['validate']
 
     copy:
@@ -171,6 +173,7 @@ module.exports = (grunt) ->
               ]
             }
           ]
+
     uglify:
       production:
         files:

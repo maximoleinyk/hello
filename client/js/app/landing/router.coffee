@@ -1,19 +1,18 @@
 define [
-	'backbone'
-	'cs!app/common/baseRouter'
-	'cs!app/landing/controller'
-	'cs!app/common/app'
-], (Backbone, BaseRouter, Controller, app) ->
-	'use strict'
+  'backbone'
+  'cs!app/common/baseRouter'
+  'cs!app/landing/controller'
+  'cs!app/common/app'
+], (Backbone, BaseRouter, Controller, App) ->
+  'use strict'
 
-	Router = BaseRouter.extend
-		routes:
-			'': 'index'
+  Router = BaseRouter.extend
+    appRoutes:
+      '': 'index'
 
-	app.addInitializer (options) ->
-		new Router 
-			controller: new Controller options
+  App.addInitializer (options) ->
+    new Router
+      controller: new Controller options
 
-		Backbone.history.start
-			root: '/'
-			pushState: true
+    Backbone.history.start
+      pushState: true

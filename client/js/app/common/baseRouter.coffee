@@ -1,9 +1,10 @@
 define ['marionette', 'cs!app/common/view/notFound/top'], (Marionette, NotFound) ->
+  'use strict';
 
-	Marionette.AppRouter.extend
+  Marionette.AppRouter.extend
 
-		routes: 
-			'*404': 'notFound'
+    routes:
+      '*404': 'notFound'
 
-		notFound: ->
-			@eventBus.trigger 'show:page', new NotFound
+    notFound: ->
+      @eventBus.trigger 'display:content', new NotFound

@@ -4,9 +4,9 @@ define(['socket.io'], function(io) {
 	var socket = io.connect('http://localhost:8081');
 
 		socket.on('connect', function () {
-			socket.on('client', function(data) {
-				console.log(data);
+			socket.on('client', function() {
 				socket.emit('server', {mesage: 'Hello from client!'});
 			});
 		});
+
 });

@@ -1,16 +1,16 @@
-define ['jquery', 'marionette', 'hbs!app/common/view/layout/top'], ($, Marionette, html) ->
-	'use strict'
+define ['marionette', 'hbs!app/common/view/layout/top'], (Marionette, html) ->
+  'use strict'
 
-	Layout = Marionette.Layout.extend 
+  Marionette.Layout.extend
 
-		el: '#app'
-		template: html
+    el: '#app'
+    template: html
 
-		regions:
-			content: '#content'
+    regions:
+      content: '#content'
 
-		appEvents:
-			'layout:content': '_showContent'
+    appEvents:
+      'display:content': '_showContent'
 
-		_showContent: (view) ->
-			@content.show view
+    _showContent: (view) ->
+      @content.show view
