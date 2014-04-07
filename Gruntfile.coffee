@@ -195,7 +195,8 @@ module.exports = (grunt) ->
 
   grunt.registerTask 'validate', ['eslint']
   grunt.registerTask 'precompile', ['copy:js', 'less', 'coffee:prod', 'replace:cs']
-  grunt.registerTask 'build', ['requirejs', 'replace:html', 'copy:css', 'copy:require', 'copy:config', 'copy:modules']
+  grunt.registerTask 'build', ['requirejs', 'replace:html', 'copy:css', 'copy:require', 'copy:config',
+                               'copy:modules']
   grunt.registerTask 'optimize', ['uglify']
 
   grunt.registerTask 'default', ['clean', 'validate', 'precompile', 'build', 'optimize', 'clean:temp']
