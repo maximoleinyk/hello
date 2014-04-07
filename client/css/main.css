@@ -7126,9 +7126,34 @@ h4,
 h5,
 h6 {
   font-weight: 300 !important;
+  text-shadow: 1px 1px 1px #fff;
+  color: #333;
+  cursor: default;
+}
+p {
+  cursor: default;
+}
+a {
+  cursor: pointer;
+}
+p,
+a {
+  text-shadow: 1px 1px 1px #fff;
+}
+#app {
+  background-color: #f1f1f1;
 }
 .fa.fa-large {
   font-size: 4em;
+}
+.fa.fa-medium {
+  font-size: 3em;
+}
+.relative {
+  position: relative;
+}
+.inline-children > * {
+  display: inline-block;
 }
 body {
   background-color: #fefefe;
@@ -7141,19 +7166,25 @@ body {
 .image {
   background: url('../img/glyphicons/png/glyphicons_000_glass.png') no-repeat 0 0;
 }
+.dashboard {
+  min-width: 200px;
+}
 .header-section {
   height: 200px;
-  background-color: #f1f1f1;
-}
-.info-section {
-  -webkit-box-shadow: 0 -1px 1px rgba(0, 0, 0, 0.1);
-  box-shadow: 0 -1px 1px rgba(0, 0, 0, 0.1);
-  position: relative;
+  overflow: hidden;
+  background: #f1f1f1 url('/img/thames.jpg') no-repeat center 35%;
+  background-size: 100%;
 }
 .hello {
   font-weight: 300;
   font-size: 56px;
   text-shadow: 0 1px 1px #fff;
+}
+.container-wrapper {
+  -webkit-box-shadow: 0 -1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 -1px 1px rgba(0, 0, 0, 0.1);
+  position: relative;
+  border-top: 1px solid #fff;
 }
 .photo {
   -webkit-box-shadow: 0 -1px 1px rgba(0, 0, 0, 0.1);
@@ -7161,7 +7192,6 @@ body {
   width: 200px;
   height: 200px;
   border: 3px solid #ffffff;
-  background-size: 200px;
 }
 .offset {
   position: absolute;
@@ -7169,12 +7199,31 @@ body {
   left: 50%;
   margin-left: -100px;
 }
+.name {
+  font-size: 18px;
+  font-weight: 300;
+}
 .email {
+  font-size: 14px;
+  font-weight: 300;
+}
+.email a {
   color: #888 !important;
 }
 .comment {
-  padding-top: 200px;
+  padding-top: 180px;
+  margin-bottom: 40px;
 }
 .links {
-  width: 400px;
+  width: 221px;
+  padding: 0;
+}
+.links a {
+  color: #888;
+}
+.links a:hover {
+  color: #2a6496;
+}
+.links > * {
+  padding: 0 10px;
 }

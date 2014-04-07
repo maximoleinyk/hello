@@ -1,3 +1,4 @@
+
 html,
 body {
   width: 100%;
@@ -8,10 +9,42 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: 300 !important;
+  text-shadow: 1px 1px 1px #fff;
+  color: #333;
+  cursor: default;
+}
+
+p {
+  cursor: default;
+}
+
+a {
+  cursor: pointer;
+}
+
+p, a {
+  text-shadow: 1px 1px 1px #fff;
+}
+
+#app {
+  background-color: #f1f1f1;
 }
 
 .fa {
   &.fa-large {
     font-size: 4em;
+  }
+  &.fa-medium {
+    font-size: 3em;
+  }
+}
+
+.relative {
+  position: relative;
+}
+
+.inline-children {
+  > * {
+    display: inline-block;
   }
 }

@@ -1,0 +1,77 @@
+@import "../globals/bootstrap/mixins";
+@import "../globals/variables";
+
+.dashboard {
+  min-width: 200px;
+}
+
+.header-section {
+  height: 200px;
+  overflow: hidden;
+  background: #f1f1f1 url('/img/thames.jpg') no-repeat center 35%;
+  background-size: 100%;
+}
+
+.hello {
+  font-weight: 300;
+  font-size: 56px;
+  text-shadow: 0 1px 1px #fff;
+}
+
+.container-wrapper {
+  .box-shadow(0 -1px 1px @shadowColor);
+
+  position: relative;
+  border-top: 1px solid #fff;
+}
+
+.photo {
+  .box-shadow(0 -1px 1px @shadowColor);
+
+  width: @iconWidth;
+  height: @iconWidth;
+  border: 3px solid @borderColor;
+}
+
+.offset {
+  position: absolute;
+  top: -102px;
+  left: 50%;
+  margin-left: -@iconWidth/2;
+}
+
+.name {
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.email {
+  font-size: 14px;
+  font-weight: 300;
+
+  a {
+    color: #888 !important;
+  }
+}
+
+.comment {
+  padding-top: 180px;
+  margin-bottom: 40px;
+}
+
+.links {
+  width: 221px;
+  padding: 0;
+
+  a {
+    color: #888;
+
+    &:hover {
+      color: #2a6496;
+    }
+  }
+
+  > * {
+    padding: 0 10px;
+  }
+}
