@@ -7118,6 +7118,7 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+  background-color: #f1f1f1;
 }
 h1,
 h2,
@@ -7140,9 +7141,6 @@ p,
 a {
   text-shadow: 1px 1px 1px #fff;
 }
-#app {
-  background-color: #f1f1f1;
-}
 .fa.fa-large {
   font-size: 4em;
 }
@@ -7155,16 +7153,11 @@ a {
 .inline-children > * {
   display: inline-block;
 }
-body {
-  background-color: #fefefe;
-  margin: 0;
-  padding: 0;
-}
-#app {
-  height: 100%;
-}
-.image {
-  background: url('../img/glyphicons/png/glyphicons_000_glass.png') no-repeat 0 0;
+noscript {
+  display: block;
+  width: 400px;
+  margin: 100 auto 0;
+  text-align: center;
 }
 .dashboard {
   min-width: 200px;

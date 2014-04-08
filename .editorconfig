@@ -18,3 +18,12 @@ indent_size = 2
 indent_style = tab
 indent_size = 4
 
+[*.hbs]
+indent_style = tab
+indent_size = 4
+
+[*.ect]
+indent_style = tab
+indent_size = 1
+tab_width = 4
+
