@@ -7159,19 +7159,45 @@ noscript {
   margin: 100 auto 0;
   text-align: center;
 }
+.links {
+  width: 221px;
+  padding: 0;
+}
+.links a {
+  color: #888;
+}
+.links a:hover {
+  color: #2a6496;
+}
+.links > * {
+  padding: 0 10px;
+}
+#content {
+  min-height: 100%;
+  margin-bottom: -70px;
+}
+#content:after {
+  content: "";
+  display: block;
+}
+#footer,
+#content:after {
+  height: 70px;
+  padding: 15px 0;
+}
 .dashboard {
   min-width: 200px;
 }
 .header-section {
   height: 200px;
   overflow: hidden;
-  background: #f1f1f1 url('/img/thames.jpg') no-repeat center 35%;
-  background-size: 100%;
+  background-color: #444;
 }
 .hello {
   font-weight: 300;
   font-size: 56px;
-  text-shadow: 0 1px 1px #fff;
+  text-shadow: 0 0 1px #000;
+  color: #fff;
 }
 .container-wrapper {
   -webkit-box-shadow: 0 -1px 1px rgba(0, 0, 0, 0.1);
@@ -7206,17 +7232,4 @@ noscript {
 .comment {
   padding-top: 180px;
   margin-bottom: 40px;
-}
-.links {
-  width: 221px;
-  padding: 0;
-}
-.links a {
-  color: #888;
-}
-.links a:hover {
-  color: #2a6496;
-}
-.links > * {
-  padding: 0 10px;
 }
