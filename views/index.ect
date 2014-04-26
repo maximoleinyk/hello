@@ -10,17 +10,16 @@
 </head>
 <body>
 	<div id="app"></div>
-
 	<noscript>
 		For full functionality of this site it is necessary to enable JavaScript.
  		Here are the <a href="http://www.enable-javascript.com/" target="_blank">
  		instructions how to enable JavaScript in your web browser</a>.
 	</noscript>
 
-	<script src="/js/require.js"></script>
+	<script src="/js/libs/requirejs/require.js"></script>
 	<script>
-		require(['/js/app/config.js'], function() {
-			require(['app/landing/main']);
+		require(['/js/config.js'], function() {
+			require(['cs!app/landing/main']);
 		});
 	</script>
 </body>

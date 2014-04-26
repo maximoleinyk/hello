@@ -31,7 +31,7 @@ module.exports = (grunt) ->
             'icon-font-path': '"../fonts/"'
             'fa-font-path': '"../fonts/"'
         files:
-          './dist/css/main.css': './client/css/main.less'
+          './dist/client/css/main.css': './client/css/main.less'
 
     coffee:
       dev:
@@ -62,6 +62,13 @@ module.exports = (grunt) ->
         tasks: ['validate']
 
     copy:
+      ect:
+        files: [{
+          expand: true
+          src: ['**']
+          cwd: './views/'
+          dest: './dist/server/'
+        }]
       js:
         files: [
           {
@@ -77,13 +84,13 @@ module.exports = (grunt) ->
             expand: true
             src: ['**']
             cwd: './client/img'
-            dest: './dist/img/'
+            dest: './dist/client/img/'
           },
           {
             expand: true
             src: ['**']
             cwd: './client/fonts'
-            dest: './dist/fonts/'
+            dest: './dist/client/fonts/'
           }
         ]
       require:
@@ -92,7 +99,7 @@ module.exports = (grunt) ->
             expand: true
             src: ['**/require.js']
             cwd: './client/js/libs/requirejs/'
-            dest: './dist/js/'
+            dest: './dist/client/js/'
           }
         ]
       config:
@@ -101,7 +108,7 @@ module.exports = (grunt) ->
             expand: true
             src: ['**/config.js']
             cwd: './temp/built/js/'
-            dest: './dist/js/app'
+            dest: './dist/client/js/app'
           }
         ]
       modules:
@@ -110,11 +117,29 @@ module.exports = (grunt) ->
             expand: true
             src: ['**/landing/main.js']
             cwd: './temp/built/js/app'
-            dest: './dist/js/app/'
+            dest: './dist/client/js/app/'
           }
         ]
 
     replace:
+      img:
+        src: './dist/client/js/app/**/*.js'
+        overwrite: true
+        replacements: [
+          {
+            from: '/img'
+            to: '/client/img'
+          }
+        ]
+      baseURL:
+        src: './dist/client/js/app/config.js'
+        overwrite: true
+        replacements: [
+          {
+            from: 'baseUrl:"/js"'
+            to: 'baseUrl:"/client/js"'
+          }
+        ]
       cs:
         src: './temp/js/app/**/*.js'
         overwrite: true
@@ -125,20 +150,24 @@ module.exports = (grunt) ->
           }
         ]
       html:
-        src: './views/layout.ect'
-        dest: './views/index.ect'
+        src: './dist/server/index.ect'
+        dest: './dist/server/index.ect'
         replacements: [
-          {
-            from: 'src="/js/libs/requirejs/require.js"'
-            to: 'src="/js/require.js"'
-          }
-          {
-            from: '/js/config.js'
-            to: '/js/app/config.js'
-          }
           {
             from: 'cs!'
             to: ''
+          }
+          {
+            from: 'src="/js/libs/requirejs/require.js"'
+            to: 'src="/client/js/require.js"'
+          }
+          {
+            from: 'href="/css/main.css"'
+            to: 'href="/client/css/main.css"'
+          }
+          {
+            from: '/js/config.js'
+            to: '/client/js/app/config.js'
           }
         ]
 
@@ -179,9 +208,9 @@ module.exports = (grunt) ->
     uglify:
       production:
         files:
-          './dist/js/require.js': './dist/js/require.js'
-          './dist/js/app/config.js': './dist/js/app/config.js'
-          './dist/js/app/landing/main.js': './dist/js/app/landing/main.js'
+          './dist/client/js/require.js': './dist/client/js/require.js'
+          './dist/client/js/app/config.js': './dist/client/js/app/config.js'
+          './dist/client/js/app/landing/main.js': './dist/client/js/app/landing/main.js'
 
   grunt.loadNpmTasks 'grunt-contrib-clean'
   grunt.loadNpmTasks 'grunt-contrib-copy'
@@ -195,9 +224,9 @@ module.exports = (grunt) ->
 
   grunt.registerTask 'validate', ['eslint']
   grunt.registerTask 'precompile', ['copy:js', 'less', 'coffee:prod', 'replace:cs']
-  grunt.registerTask 'build', ['requirejs', 'replace:html', 'copy:css', 'copy:require', 'copy:config',
+  grunt.registerTask 'build', ['requirejs', 'copy:ect', 'replace:html', 'copy:css', 'copy:require', 'copy:config',
                                'copy:modules']
-  grunt.registerTask 'optimize', ['uglify']
+  grunt.registerTask 'optimize', ['uglify', 'replace:baseURL', 'replace:img']
 
   grunt.registerTask 'default', ['clean', 'validate', 'precompile', 'build', 'optimize', 'clean:temp']
 
