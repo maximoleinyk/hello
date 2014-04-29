@@ -62,6 +62,12 @@ module.exports = (grunt) ->
         tasks: ['validate']
 
     copy:
+      sitemap:
+        files: [{
+          expand: true
+          src: ['./sitemap.xml']
+          dest: './dist/client/'
+        }]
       robots:
         files: [{
           expand: true
@@ -213,7 +219,7 @@ module.exports = (grunt) ->
   grunt.registerTask 'validate', ['eslint']
   grunt.registerTask 'precompile', ['copy:js', 'less', 'coffee:prod', 'replace:cs']
   grunt.registerTask 'build', ['requirejs', 'copy:ect', 'replace:html', 'copy:css', 'copy:require', 'copy:config',
-                               'copy:modules', 'copy:robots']
+                               'copy:modules', 'copy:robots', 'copy:sitemap']
   grunt.registerTask 'optimize', ['uglify']
 
   grunt.registerTask 'default', ['clean', 'validate', 'precompile', 'build', 'optimize', 'clean:temp']

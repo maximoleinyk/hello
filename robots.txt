@@ -6,4 +6,4 @@ Disallow: /fonts/
 Disallow: /img/
 Disallow: /js/
 
-Host: maksymoleinyk.com
+Host: www.maksymoleinyk.com

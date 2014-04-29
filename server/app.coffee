@@ -18,6 +18,7 @@ app.configure ->
   app.engine ".ect", require("ect")().render
   app.use express.logger()
   app.use express.bodyParser()
+  app.use express.methodOverride()
   app.use express.cookieParser COOKIE_SECRET
   app.use express.session secret: SESSION_SECRET
   app.use app.router

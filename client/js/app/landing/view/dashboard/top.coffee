@@ -16,4 +16,4 @@ define ['marionette', 'hbs!app/landing/view/dashboard/top'], (Marionette, html) 
           easing: 'easeOutQuint'
           opacity: 1
           'margin-top': '20px'
-      setTimeout animate, 150
+      setTimeout animate, 250
