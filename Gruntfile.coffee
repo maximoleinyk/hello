@@ -62,11 +62,17 @@ module.exports = (grunt) ->
         tasks: ['validate']
 
     copy:
+      robots:
+        files: [{
+          expand: true
+          src: ['./robots.txt']
+          dest: './dist/client/'
+        }]
       ect:
         files: [{
           expand: true
           src: ['**']
-          cwd: './views/'
+          cwd: './server/views/'
           dest: './dist/server/'
         }]
       js:
@@ -122,24 +128,6 @@ module.exports = (grunt) ->
         ]
 
     replace:
-      img:
-        src: './dist/client/js/app/**/*.js'
-        overwrite: true
-        replacements: [
-          {
-            from: '/img'
-            to: '/client/img'
-          }
-        ]
-      baseURL:
-        src: './dist/client/js/app/config.js'
-        overwrite: true
-        replacements: [
-          {
-            from: 'baseUrl:"/js"'
-            to: 'baseUrl:"/client/js"'
-          }
-        ]
       cs:
         src: './temp/js/app/**/*.js'
         overwrite: true
@@ -159,15 +147,15 @@ module.exports = (grunt) ->
           }
           {
             from: 'src="/js/libs/requirejs/require.js"'
-            to: 'src="/client/js/require.js"'
+            to: 'src="/js/require.js"'
           }
           {
             from: 'href="/css/main.css"'
-            to: 'href="/client/css/main.css"'
+            to: 'href="/css/main.css"'
           }
           {
             from: '/js/config.js'
-            to: '/client/js/app/config.js'
+            to: '/js/app/config.js'
           }
         ]
 
@@ -225,8 +213,8 @@ module.exports = (grunt) ->
   grunt.registerTask 'validate', ['eslint']
   grunt.registerTask 'precompile', ['copy:js', 'less', 'coffee:prod', 'replace:cs']
   grunt.registerTask 'build', ['requirejs', 'copy:ect', 'replace:html', 'copy:css', 'copy:require', 'copy:config',
-                               'copy:modules']
-  grunt.registerTask 'optimize', ['uglify', 'replace:baseURL', 'replace:img']
+                               'copy:modules', 'copy:robots']
+  grunt.registerTask 'optimize', ['uglify']
 
   grunt.registerTask 'default', ['clean', 'validate', 'precompile', 'build', 'optimize', 'clean:temp']
 
