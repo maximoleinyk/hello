@@ -1,0 +1,15 @@
+{
+    "name": "Require Coffee",
+    "description": "CoffeeScript Compiler for Zest",
+    "version": "0.0.q",
+    "dependencies": {
+        "coffee-script": ">=1.2.0"
+    },
+    "main": "cs.js",
+    "volo": {
+        "type": "directory",
+        "dependencies": {
+            "coffee-script": "jashkenas/coffee-script"
+        }
+    }
+}

@@ -4,26 +4,17 @@ module.exports = (grunt) ->
     pkg: grunt.file.readJSON('package.json')
 
     clean:
-      dist: './dist/'
-      temp: './temp/'
+      dist: 'dist'
+      temp: 'temp'
 
     eslint:
       target:
-        src: ['./client/js/app/**/*.js', './client/js/etc/**/*.js']
+        src: ['src/client/js/app/**/*.js', 'src/client/js/etc/**/*.js']
       options:
         config: 'eslint.json'
 
     less:
-      dev:
-        options:
-          cleancss: false
-          modifyVars:
-            'img-path': '"../img/"'
-            'icon-font-path': '"../fonts/"'
-            'fa-font-path': '"../fonts/"'
-        files:
-          './client/css/main.css': './client/css/main.less'
-      prod:
+      compile:
         options:
           cleancss: true
           modifyVars:
@@ -31,63 +22,69 @@ module.exports = (grunt) ->
             'icon-font-path': '"../fonts/"'
             'fa-font-path': '"../fonts/"'
         files:
-          './dist/client/css/main.css': './client/css/main.less'
+          'src/client/css/main.css': 'src/client/css/main.less'
 
     coffee:
-      dev:
+      compile:
         expand: true
         flatten: false
         ext: '.js'
-        src: './temp/js/app/**/*.coffee'
-      prod:
-        expand: true
-        flatten: false
-        ext: '.js'
-        src: './temp/js/app/**/*.coffee'
+        src: 'temp/js/app/**/*.coffee'
 
     watch:
       coffee:
-        files: ['./client/js/app/**/*.coffee']
+        files: ['src/client/js/app/**/*.coffee']
         tasks: ['coffee']
         options:
           spawn: false
           livereload: true
       less:
-        files: ['./client/css/**/*.less']
-        tasks: ['less:dev']
+        files: ['src/client/css/**/*.less']
+        tasks: ['less']
         options:
           livereload: true
       validate:
-        files: ['./client/js/**/*.js']
+        files: ['src/client/js/**/*.js']
         tasks: ['validate']
 
     copy:
-      sitemap:
-        files: [{
-          expand: true
-          src: ['./sitemap.xml']
-          dest: './dist/client/'
-        }]
-      robots:
-        files: [{
-          expand: true
-          src: ['./robots.txt']
-          dest: './dist/client/'
-        }]
+      misc:
+        files: [
+          {
+            expand: true
+            src: ['**/robots.txt']
+            cwd: 'src/client'
+            dest: 'dist/client'
+          }
+          {
+            expand: true
+            src: ['**/sitemap.xml']
+            cwd: 'src/client'
+            dest: 'dist/client'
+          }
+        ]
       ect:
-        files: [{
-          expand: true
-          src: ['**']
-          cwd: './server/views/'
-          dest: './dist/server/'
-        }]
-      js:
         files: [
           {
             expand: true
             src: ['**']
-            cwd: './client/js'
-            dest: './temp/js'
+            cwd: 'temp/server'
+            dest: 'dist/server'
+          }
+        ]
+      temp:
+        files: [
+          {
+            expand: true
+            src: ['**']
+            cwd: 'src/client/js'
+            dest: 'temp/js'
+          }
+          {
+            expand: true
+            src: ['**']
+            cwd: 'src/server/views'
+            dest: 'temp/server'
           }
         ]
       css:
@@ -95,47 +92,48 @@ module.exports = (grunt) ->
           {
             expand: true
             src: ['**']
-            cwd: './client/img'
-            dest: './dist/client/img/'
-          },
+            cwd: 'src/client/img'
+            dest: 'dist/client/img'
+          }
           {
             expand: true
             src: ['**']
-            cwd: './client/fonts'
-            dest: './dist/client/fonts/'
+            cwd: 'src/client/fonts'
+            dest: 'dist/client/fonts'
+          }
+          {
+            expand: true
+            src: ['**/main.css']
+            cwd: 'src/client/css'
+            dest: 'dist/client/css'
           }
         ]
-      require:
+      js:
         files: [
           {
             expand: true
             src: ['**/require.js']
-            cwd: './client/js/libs/requirejs/'
-            dest: './dist/client/js/'
+            cwd: 'temp/built/js/libs/requirejs'
+            dest: 'dist/client/js'
           }
-        ]
-      config:
-        files: [
           {
             expand: true
             src: ['**/config.js']
-            cwd: './temp/built/js/'
-            dest: './dist/client/js/app'
-          }
-        ]
-      modules:
-        files: [
+            cwd: 'temp/built/js'
+            dest: 'dist/client/js/app'
+          },
           {
             expand: true
-            src: ['**/landing/main.js']
-            cwd: './temp/built/js/app'
-            dest: './dist/client/js/app/'
+            src: [
+              '**/landing/main.js'
+            ]
+            cwd: 'temp/built/js/app'
+            dest: 'dist/client/js/app'
           }
         ]
-
     replace:
       cs:
-        src: './temp/js/app/**/*.js'
+        src: 'temp/js/app/**/*.js'
         overwrite: true
         replacements: [
           {
@@ -144,8 +142,8 @@ module.exports = (grunt) ->
           }
         ]
       html:
-        src: './dist/server/index.ect'
-        dest: './dist/server/index.ect'
+        src: 'temp/server/index.ect'
+        dest: 'temp/server/index.ect'
         replacements: [
           {
             from: 'cs!'
@@ -156,10 +154,6 @@ module.exports = (grunt) ->
             to: 'src="/js/require.js"'
           }
           {
-            from: 'href="/css/main.css"'
-            to: 'href="/css/main.css"'
-          }
-          {
             from: '/js/config.js'
             to: '/js/app/config.js'
           }
@@ -168,10 +162,10 @@ module.exports = (grunt) ->
     requirejs:
       app:
         options:
-          appDir: './temp/js/'
+          appDir: 'temp/js'
           baseUrl: './'
-          dir: './temp/built/js/'
-          mainConfigFile: './temp/js/config.js'
+          dir: 'temp/built/js/'
+          mainConfigFile: 'temp/js/config.js'
           optimize: 'none'
           fileExclusionRegExp: /\.css/
           modules: [
@@ -200,11 +194,17 @@ module.exports = (grunt) ->
           ]
 
     uglify:
-      production:
+      compile:
         files:
-          './dist/client/js/require.js': './dist/client/js/require.js'
-          './dist/client/js/app/config.js': './dist/client/js/app/config.js'
-          './dist/client/js/app/landing/main.js': './dist/client/js/app/landing/main.js'
+          'dist/client/js/require.js': 'dist/client/js/require.js'
+          'dist/client/js/app/config.js': 'dist/client/js/app/config.js'
+          'dist/client/js/app/landing/main.js': 'dist/client/js/app/landing/main.js'
+
+    mochaTest:
+      test:
+        options:
+          reporter: 'spec'
+        src: ['test/**/*.js']
 
   grunt.loadNpmTasks 'grunt-contrib-clean'
   grunt.loadNpmTasks 'grunt-contrib-copy'
@@ -215,14 +215,15 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-less'
   grunt.loadNpmTasks 'grunt-contrib-requirejs'
   grunt.loadNpmTasks 'grunt-contrib-uglify'
+  grunt.loadNpmTasks 'grunt-mocha-test'
 
   grunt.registerTask 'validate', ['eslint']
-  grunt.registerTask 'precompile', ['copy:js', 'less', 'coffee:prod', 'replace:cs']
-  grunt.registerTask 'build', ['requirejs', 'copy:ect', 'replace:html', 'copy:css', 'copy:require', 'copy:config',
-                               'copy:modules', 'copy:robots', 'copy:sitemap']
-  grunt.registerTask 'optimize', ['uglify']
+  grunt.registerTask 'build', ['copy:temp', 'coffee', 'less', 'replace', 'requirejs']
+  grunt.registerTask 'dist', ['copy:ect', 'copy:css', 'copy:js', 'copy:misc']
+  grunt.registerTask 'optimize', ['uglify', 'clean:temp']
 
-  grunt.registerTask 'default', ['clean', 'validate', 'precompile', 'build', 'optimize', 'clean:temp']
+  grunt.registerTask 'test', ['mochaTest']
+  grunt.registerTask 'default', ['clean', 'validate', 'build', 'dist', 'optimize']
 
 
 
