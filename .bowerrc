@@ -1,4 +1,4 @@
 {
-    "directory": "./client/js/libs",
+    "directory": "src/client/js/libs",
     "json": "bower.json"
 }

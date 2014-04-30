@@ -8,7 +8,7 @@ require.config({
         underscore: 'libs/underscore/underscore',
         backbone: 'libs/backbone/backbone',
         'backbone.wreqr': 'libs/backbone.wreqr/lib/amd/backbone.wreqr',
-        'backbone.babysitter': 'libs/backbone.babysitter/lib/amd/backbone.babysitter',
+        'backbone.babysitter': 'libs/backbone.babysitter/lib/backbone.babysitter',
         marionette: 'libs/marionette/lib/core/amd/backbone.marionette',
         handlebars: 'libs/handlebars/handlebars',
         hbs: 'libs/requirejs-hbs/hbs',
